@@ -1,16 +1,54 @@
 const lousaContainer = document.getElementById("lousa-container");
 const pixelContainer = document.querySelector(".pixel");
 const colorPalette = document.getElementById("color-palette");
+const inputWidth = document.getElementById("input-width");
+const inputHeight = document.getElementById("input-height");
+const inputPixelEdge = document.getElementById("input-pixel-edge");
+
+
 
 function getPropertiesOfUser() {
-  const width = 850;
-  const height = 500;
+  const width = 600;
+  const height = 600;
   const pixelEdges = tamanhosDePixelsPossivel(width, height);
   const edge = pixelEdges[0];
+  inputPixelEdge.max = (pixelEdges.length > 9) ? 10 : pixelEdges.length -1;
+  inputPixelEdge.min = 0;
+  inputPixelEdge.value = 0;
   renderizationOfLousa(width, height, edge);
   inicializaPalette();
 }
 getPropertiesOfUser();
+
+function userProperties () {
+  let width = 600;
+  let height = 600;
+  let pixelEdges = tamanhosDePixelsPossivel(width, height);
+  let edge = pixelEdges[0];
+
+  inputWidth.addEventListener('input', (event)=> {
+    width = event.target.value;
+    pixelEdges = tamanhosDePixelsPossivel(width, height);
+    edge = pixelEdges[0];
+    inputPixelEdge.value = 0;
+    inputPixelEdge.max = (pixelEdges.length > 9) ? 10 : pixelEdges.length -1;
+    renderizationOfLousa(width, height, edge);
+  });
+  inputHeight.addEventListener('input', (event)=> {
+    height = event.target.value;
+    pixelEdges = tamanhosDePixelsPossivel(width, height);
+    edge = pixelEdges[0];
+    inputPixelEdge.value = 0;
+    inputPixelEdge.max = (pixelEdges.length > 9) ? 10 : pixelEdges.length -1;
+    renderizationOfLousa(width, height, edge);
+  });
+  inputPixelEdge.addEventListener('input', (event)=>{
+    let index = event.target.value;
+    edge = pixelEdges[index];
+    renderizationOfLousa(width, height, edge);
+  })
+}
+userProperties();
 
 function renderizationOfLousa(lousaWidth, lousaHeight, pixelEdge) {
   lousaContainer.style.width = lousaWidth + "px";
@@ -18,14 +56,22 @@ function renderizationOfLousa(lousaWidth, lousaHeight, pixelEdge) {
 
   const quantityOfPixels = (lousaWidth * lousaHeight) / pixelEdge ** 2;
 
-  for (let index = 0; index < quantityOfPixels; index += 1) {
-    const pixel = document.createElement("div");
-    pixel.style.width = pixelEdge + "px";
-    pixel.style.height = pixelEdge + "px";
-    pixel.className = "pixel";
-    pixel.addEventListener("click", pinta);
-    lousaContainer.appendChild(pixel);
+  if (quantityOfPixels < 5000){
+    if (lousaContainer.children.length !== 0){
+      lousaContainer.innerHTML = null;
+    }
+    for (let index = 0; index < quantityOfPixels; index += 1) {
+      const pixel = document.createElement("div");
+      pixel.style.width = pixelEdge + "px";
+      pixel.style.height = pixelEdge + "px";
+      pixel.className = "pixel";
+      pixel.addEventListener("click", pinta);
+      lousaContainer.appendChild(pixel);
+    }
+  } else {
+    alert('QUANTIDADE DE PIXEL MUITO ALTA, VC SERÁ IMPEDIDO DE ALMENTAR A QUANTIDADE DE PIXEL')
   }
+  
 }
 
 function pinta(event) {
