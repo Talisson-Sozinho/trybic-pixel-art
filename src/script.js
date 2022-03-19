@@ -6,7 +6,7 @@ function getPropertiesOfUser() {
   const width = 800;
   const height = 500;
   const pixelEdges = tamanhosDePixelsPossivel(width, height);
-  const edge = pixelEdges[2];
+  const edge = pixelEdges[1];
   renderizationOfLousa(width, height, edge);
   inicializaPalette();
 }
@@ -31,6 +31,17 @@ function pinta(event) {
   const mouseColor =
     document.getElementsByClassName("selected")[0].style.backgroundColor;
   event.target.style.backgroundColor = mouseColor;
+}
+function selecionaCor (event){
+  const palette = event.target.parentElement.children;
+  for (let color of palette) {
+    if (color.className = "selected color") {
+      color.className = "color";
+    } 
+    if ( color.className = "color"){
+      event.target.className = "selected color";
+    }
+  }
 }
 
 function inicializaPalette() {
@@ -58,15 +69,7 @@ function inicializaPalette() {
     const color = document.createElement("div");
     color.className = "color";
     color.style.backgroundColor = colors[index];
-    color.addEventListener("click", (event) => {
-      const palette = event.target.parentElement.children;
-      for (let color of palette) {
-        if ((color.className = "selected color")) {
-          color.className = "color";
-        }
-        event.target.className = "selected color";
-      }
-    });
+    color.addEventListener("click", selecionaCor);
     colorPalette.appendChild(color);
   }
   const colorRGB = document.createElement("input");
