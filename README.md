@@ -21,4 +21,4 @@ Projeto pessoal - Início.
   - pagina do desenho
     - container para o desenho
     - cores paratingir
-    - tamando 8x8
+    - tamando varivável de pixel variável
