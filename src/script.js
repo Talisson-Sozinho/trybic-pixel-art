@@ -3,10 +3,10 @@ const pixelContainer = document.querySelector(".pixel");
 const colorPalette = document.getElementById("color-palette");
 
 function getPropertiesOfUser() {
-  const width = 800;
+  const width = 850;
   const height = 500;
   const pixelEdges = tamanhosDePixelsPossivel(width, height);
-  const edge = pixelEdges[1];
+  const edge = pixelEdges[0];
   renderizationOfLousa(width, height, edge);
   inicializaPalette();
 }
@@ -27,21 +27,15 @@ function renderizationOfLousa(lousaWidth, lousaHeight, pixelEdge) {
     lousaContainer.appendChild(pixel);
   }
 }
+
 function pinta(event) {
-  const mouseColor =
-    document.getElementsByClassName("selected")[0].style.backgroundColor;
+  const mouseColor = document.getElementById("colorRGB").value;
   event.target.style.backgroundColor = mouseColor;
 }
+
 function selecionaCor (event){
-  const palette = event.target.parentElement.children;
-  for (let color of palette) {
-    if (color.className = "selected color") {
-      color.className = "color";
-    } 
-    if ( color.className = "color"){
-      event.target.className = "selected color";
-    }
-  }
+  let selectedColor = event.target.innerText;
+  document.getElementById("colorRGB").value = selectedColor;
 }
 
 function inicializaPalette() {
@@ -69,6 +63,8 @@ function inicializaPalette() {
     const color = document.createElement("div");
     color.className = "color";
     color.style.backgroundColor = colors[index];
+    color.style.color = colors[index];
+    color.innerText = colors[index];
     color.addEventListener("click", selecionaCor);
     colorPalette.appendChild(color);
   }
