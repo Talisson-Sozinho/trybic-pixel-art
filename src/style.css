@@ -14,10 +14,37 @@ body {
   display: flex;
   flex-wrap: wrap;
   margin: 10vh auto;
-  background-color: lightslategray;
+  background-color: #FFF;
 }
 
 .pixel {
   border-bottom: 0.1px solid #252525;
   border-right: 0.1px solid #252525;
+}
+
+#color-palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  background-color: lightgrey;
+  right: 5px;
+  top: 10vh;
+  border: 1px solid #252525;
+  width: 10vw;
+  height: 80vh;
+}
+
+.color {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  border: 1px solid #252525;
+}
+
+#colorRGB{
+  height: 50px;
+  width: 100px;
+  border: 1px solid #252525;
 }
