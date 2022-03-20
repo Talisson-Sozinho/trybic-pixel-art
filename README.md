@@ -6,14 +6,12 @@ Projeto pessoal - Início.
    - login
      - Nickname
      - cor de fundo
+     - inserir titulo para o desenho
    - pagina de desenho
      - container para desenho
-       - tamando dos pixels
-         - "[8x8], [16x16], [32x32], [64x64]"
+       - poder alterar o tamando dos pixels
        - cores para tingir o pixel
-       - cor de fundo
      - Titulo do desenho
-     - inserir titulo para o desenho
      - nome e boas vindas ao desenho
   
 ## Mvp
@@ -22,3 +20,4 @@ Projeto pessoal - Início.
     - container para o desenho
     - cores paratingir
     - tamando varivável de pixel variável
+    - possibilidade de desenhar

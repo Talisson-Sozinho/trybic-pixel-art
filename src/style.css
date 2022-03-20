@@ -7,6 +7,25 @@ body {
   background-color: aqua;
 }
 
+#configure-container {
+  position: fixed;
+  left: 15px;
+  top: 10vh;
+  background-color: lightgrey;
+  border: 1px solid #252525;
+  height: 40vh;
+  width: 11vw;
+}
+
+#configure-container label{
+  margin-top: 34px;
+}
+
+#configure-container label, #configure-container input {
+  display: block;
+  margin-left: 10px;
+}
+
 #lousa-container{
   box-sizing: content-box;
   border-top: 0.1px solid #252525;
