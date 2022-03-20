@@ -1,10 +1,10 @@
 /* Salvando referências para alguns elemento Html que será usando no código */
 const lousaContainer = document.getElementById("lousa-container");
-const pixelContainer = document.querySelector(".pixel");
 const colorPalette = document.getElementById("color-palette");
 const inputWidth = document.getElementById("input-width");
 const inputHeight = document.getElementById("input-height");
 const inputPixelEdge = document.getElementById("input-pixel-edge");
+const borderOnOff = document.getElementsByClassName('border-option');
 
 /* Configuração inicial da lousa que poderá ser alterada pelo usuário */
 let width = 600;
@@ -36,6 +36,28 @@ function userProperties() {
   inputWidth.addEventListener("input", modifyWidthOfLousa);
   inputHeight.addEventListener("input", modifyHeightOfLousa);
   inputPixelEdge.addEventListener("change", modifyQuantityOfPixel);
+  borderOnOff[0].addEventListener('input', borderOnOrOff);
+  borderOnOff[1].addEventListener('input', borderOnOrOff);
+}
+
+/* Função para ativar e desativar as bordas do quadro de desenho */
+function borderOnOrOff (event){
+  const pixels = document.getElementsByClassName('pixel');
+  if (event.target.value === 'on'){
+    for (let pixel of pixels) {
+      pixel.style.borderBottom = '0.1px solid #252525';
+      pixel.style.borderRight = '0.1px solid #252525';
+      lousaContainer.style.borderBottom = 0;
+      lousaContainer.style.borderRight = 0;
+    }
+  }else{
+    for (let pixel of pixels) {
+      pixel.style.borderBottom = 0;
+      pixel.style.borderRight = 0;
+      lousaContainer.style.borderBottom = '0.1px solid #252525'
+      lousaContainer.style.borderRight = '0.1px solid #252525'
+    }
+  }
 }
 
 /* Função para alterar o tamando da largura conforme o novo input do usuário */
@@ -87,10 +109,21 @@ function renderizationOfLousa() {
   }
   for (let index = 0; index < quantityOfPixels; index += 1) {
     const pixel = document.createElement("div");
+    if (borderOnOff[0].checked) {
+      pixel.style.borderBottom = '0.1px solid #000000';
+      pixel.style.borderRight = '0.1px solid #000000';
+    }
     pixel.style.width = edge + "px";
     pixel.style.height = edge + "px";
     pixel.className = "pixel";
     lousaContainer.appendChild(pixel);
+  }
+  if (borderOnOff[1].checked) {
+    lousaContainer.style.borderBottom = '0.1px solid #000000';
+    lousaContainer.style.borderRight = '0.1px solid #000000';
+  } else {
+    lousaContainer.style.borderBottom = 0;
+    lousaContainer.style.borderRight = 0;
   }
   modifyTickmarksPixel();
 }

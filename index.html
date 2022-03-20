@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./src/style.css">
   <title>Trybic</title>
 </head>
 <body>
   <div id="configure-container">
-    <label>width</label>
+    <label>width:</label>
     <input id="input-width" list="tickmarks-width"type="range" max="900" min="100" step="50">
     <datalist id="tickmarks-width">
       <option value="100">
@@ -30,7 +30,7 @@
       <option value="850">
       <option value="900">
     </datalist>
-    <label>height</label>
+    <label>height:</label>
     <input id="input-height" list='tickmarks-height' type="range" max="700" min="100" step="50">
     <datalist id="tickmarks-height">
       <option value="100">
@@ -47,16 +47,23 @@
       <option value="650">
       <option value="700">
     </datalist>
-    <label>Pixel quantity</label>
+    <label>Pixel quantity:</label>
     <input id="input-pixel-edge" list="tickmarks-pixel-edge" type="range" step="1">
     <datalist id="tickmarks-pixel-edge">
     </datalist>
+    <div id="border-on-off">
+      <p>Borda:</p>
+      <label>on</label>
+      <input class="border-option" type='radio' name='boderChoice' value='on' checked/>
+      <input class="border-option" type='radio' name='boderChoice' value='off' />
+      <label>off</label>
+    </div>
   </div>
   <h1>Minha pixel art</h1>
   <div id="lousa-container">
   </div>
   <div id="color-palette">
   </div>
-  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="./src/script.js"></script>
 </body>
 </html>

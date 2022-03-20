@@ -18,8 +18,9 @@ h1 {
   top: 20vh;
   background-color: #FFD9F5;
   border-radius: 10px;
-  height: 40vh;
+  height: 50vh;
   width: 13vw;
+  padding-left: 22px;
 }
 
 #configure-container label{
@@ -28,7 +29,16 @@ h1 {
 
 #configure-container label, #configure-container input {
   display: block;
-  margin-left: 22px;
+}
+#border-on-off p {
+  margin-top: 25px;
+}
+#configure-container #border-on-off input {
+  display: inline;
+  margin-top: 5px;
+}
+#configure-container #border-on-off label {
+  display: inline;
 }
 
 #lousa-container{
@@ -39,11 +49,6 @@ h1 {
   flex-wrap: wrap;
   margin: 2vh auto;
   background-color: #FFF;
-}
-
-.pixel {
-  border-bottom: 0.1px solid #252525;
-  border-right: 0.1px solid #252525;
 }
 
 #color-palette {
