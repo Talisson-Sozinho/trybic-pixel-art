@@ -1,3 +1,5 @@
+<img src'https://user-images.githubusercontent.com/79944385/159147936-cf6efa08-0547-44d3-a9a1-d44b38514f7d.gif' />
+
 # Trybic PixelArt
 
 Projeto pessoal - Início.
