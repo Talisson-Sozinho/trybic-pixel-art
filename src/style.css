@@ -4,17 +4,22 @@
   padding: 0;
 }
 body {
-  background-color: aqua;
+  background-color: #80CBFB;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 1em;
 }
 
 #configure-container {
   position: fixed;
   left: 15px;
-  top: 10vh;
-  background-color: lightgrey;
-  border: 1px solid #252525;
+  top: 20vh;
+  background-color: #FFD9F5;
+  border-radius: 10px;
   height: 40vh;
-  width: 11vw;
+  width: 13vw;
 }
 
 #configure-container label{
@@ -23,7 +28,7 @@ body {
 
 #configure-container label, #configure-container input {
   display: block;
-  margin-left: 10px;
+  margin-left: 22px;
 }
 
 #lousa-container{
@@ -32,7 +37,7 @@ body {
   border-left: 0.1px solid #252525;
   display: flex;
   flex-wrap: wrap;
-  margin: 10vh auto;
+  margin: 2vh auto;
   background-color: #FFF;
 }
 
@@ -47,11 +52,12 @@ body {
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  background-color: lightgrey;
-  right: 5px;
+  background-color: #FFD9F5;
+  border-radius: 10px;
+  right: 15px;
   top: 10vh;
-  border: 1px solid #252525;
-  width: 11vw;
+  padding: 25px;
+  width: 15vw;
   height: 80vh;
 }
 

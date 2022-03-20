@@ -35,7 +35,7 @@ function toggleLousa(bloolean) {
 function userProperties() {
   inputWidth.addEventListener("input", modifyWidthOfLousa);
   inputHeight.addEventListener("input", modifyHeightOfLousa);
-  inputPixelEdge.addEventListener("input", modifyQuantityOfPixel);
+  inputPixelEdge.addEventListener("change", modifyQuantityOfPixel);
 }
 
 /* Função para alterar o tamando da largura conforme o novo input do usuário */
@@ -65,6 +65,16 @@ function modifyQuantityOfPixel(event) {
   renderizationOfLousa();
 }
 
+/* Função para alterar a marcação da quantidade de pixel */
+function modifyTickmarksPixel(){
+  const tickmarks = document.getElementById('tickmarks-pixel-edge');
+  for (let index = 0; index <= inputPixelEdge.max; index+=1){
+    const mark = document.createElement('option');
+    mark.value = index;
+    tickmarks.appendChild(mark);
+  }
+}
+
 /* Função para adicionar a renderização, inicial e/ou alterada pelo usuário, do qudro na pagina */
 function renderizationOfLousa() {
   lousaContainer.style.width = width + "px";
@@ -82,6 +92,7 @@ function renderizationOfLousa() {
     pixel.className = "pixel";
     lousaContainer.appendChild(pixel);
   }
+  modifyTickmarksPixel();
 }
 
 /* Função para pintar o pixel clicado com a cor selecionada */
