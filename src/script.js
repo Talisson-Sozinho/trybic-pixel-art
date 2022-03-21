@@ -22,8 +22,11 @@ const objectConfig = {
   height: 500,
   pixelEdges: 0,
   edge: 0,
-}
-objectConfig.pixelEdges = tamanhosDePixelsPossivel(objectConfig.width, objectConfig.height);
+};
+objectConfig.pixelEdges = tamanhosDePixelsPossivel(
+  objectConfig.width,
+  objectConfig.height
+);
 objectConfig.edge = objectConfig.pixelEdges[0];
 
 /* adicionando as configurações iniciais da página */
@@ -54,12 +57,12 @@ function userProperties() {
   inputWidth.addEventListener("input", modifyWidthOfLousa);
   inputHeight.addEventListener("input", modifyHeightOfLousa);
   inputPixelEdge.addEventListener("change", modifyQuantityOfPixel);
-  saveChangesButton.addEventListener("click",saveChanges);
-  deleteButton.addEventListener('click', deleteDrawing);
-  deleteLastSaveButton.addEventListener('click', deleteLastSave);
-  getLastSaveButton.addEventListener('click', ()=>{
-    if (!getLastSave()){
-      alert('Sem pixel art salva');
+  saveChangesButton.addEventListener("click", saveChanges);
+  deleteButton.addEventListener("click", deleteDrawing);
+  deleteLastSaveButton.addEventListener("click", deleteLastSave);
+  getLastSaveButton.addEventListener("click", () => {
+    if (!getLastSave()) {
+      alert("Sem pixel art salva");
     }
   });
   borderOnOff[0].addEventListener("input", borderOnOrOff);
@@ -90,7 +93,10 @@ function borderOnOrOff(event) {
 function modifyWidthOfLousa(event) {
   deleteDrawing();
   objectConfig.width = event.target.value;
-  objectConfig.pixelEdges = tamanhosDePixelsPossivel(objectConfig.width, objectConfig.height);
+  objectConfig.pixelEdges = tamanhosDePixelsPossivel(
+    objectConfig.width,
+    objectConfig.height
+  );
   objectConfig.edge = objectConfig.pixelEdges[0];
   inputPixelEdge.value = 0;
   inputPixelEdge.max = objectConfig.pixelEdges.length - 2;
@@ -101,7 +107,10 @@ function modifyWidthOfLousa(event) {
 function modifyHeightOfLousa(event) {
   deleteDrawing();
   objectConfig.height = event.target.value;
-  objectConfig.pixelEdges = tamanhosDePixelsPossivel(objectConfig.width, objectConfig.height);
+  objectConfig.pixelEdges = tamanhosDePixelsPossivel(
+    objectConfig.width,
+    objectConfig.height
+  );
   objectConfig.edge = objectConfig.pixelEdges[0];
   inputPixelEdge.value = 0;
   inputPixelEdge.max = objectConfig.pixelEdges.length - 2;
@@ -117,7 +126,7 @@ function modifyQuantityOfPixel(event) {
 }
 
 /* Função para salvar a pixel art no localStorage */
-function saveChanges(){
+function saveChanges() {
   const objChangesUser = {
     lousa: [],
     width: 0,
@@ -129,27 +138,27 @@ function saveChanges(){
   objChangesUser.height = objectConfig.height;
   objChangesUser.pixelEdges = objectConfig.pixelEdges;
   objChangesUser.edge = objectConfig.edge;
-  for (let pixel of lousaContainer.children){
+  for (let pixel of lousaContainer.children) {
     objChangesUser.lousa.push(pixel.style.backgroundColor);
   }
-  localStorage.setItem('lousaModify', JSON.stringify(objChangesUser));
-  alert('Salvo');
+  localStorage.setItem("lousaModify", JSON.stringify(objChangesUser));
+  alert("Salvo");
 }
 
 /* Função para apagar o desenho do quadro */
-function deleteDrawing(){
-  for (let pixel of lousaContainer.children){
-    pixel.style.backgroundColor = '#FFFFFF';
+function deleteDrawing() {
+  for (let pixel of lousaContainer.children) {
+    pixel.style.backgroundColor = "#FFFFFF";
   }
 }
 
 /* Função para deletar o save do localStorage */
-function deleteLastSave(){
+function deleteLastSave() {
   localStorage.clear();
 }
 
-function getLastSave(){
-  const storage = JSON.parse(localStorage.getItem('lousaModify'));
+function getLastSave() {
+  const storage = JSON.parse(localStorage.getItem("lousaModify"));
   let hasLastSave = false;
   if (storage !== null) {
     hasLastSave = true;
@@ -185,7 +194,7 @@ function setTickmarks() {
     const tickmark = document.createElement("option");
     tickmark.value = index;
     tickmarksWidth.appendChild(tickmark);
-    if(index <= HEIGHT_MAX){
+    if (index <= HEIGHT_MAX) {
       const tickmark = document.createElement("option");
       tickmark.value = index;
       tickmarksHeight.appendChild(tickmark);
@@ -195,11 +204,12 @@ function setTickmarks() {
 
 /* Função para adicionar a renderização, inicial e/ou alterada pelo usuário, do qudro na pagina */
 function renderizationOfLousa() {
-  const storage = JSON.parse(localStorage.getItem('lousaModify'));
+  const storage = JSON.parse(localStorage.getItem("lousaModify"));
   lousaContainer.style.width = objectConfig.width + "px";
   lousaContainer.style.height = objectConfig.height + "px";
 
-  const quantityOfPixels = (objectConfig.width * objectConfig.height) / objectConfig.edge ** 2;
+  const quantityOfPixels =
+    (objectConfig.width * objectConfig.height) / objectConfig.edge ** 2;
 
   if (lousaContainer.children.length !== 0) {
     lousaContainer.innerHTML = null;
@@ -211,11 +221,9 @@ function renderizationOfLousa() {
       pixel.style.borderBottom = "0.1px solid #000000";
       pixel.style.borderRight = "0.1px solid #000000";
     }
-    (storage === null) ? (
-      pixel.style.backgroundColor = '#FFFFFF'
-    ):(
-      pixel.style.backgroundColor = storage.lousa[index]
-    )
+    storage === null
+      ? (pixel.style.backgroundColor = "#FFFFFF")
+      : (pixel.style.backgroundColor = storage.lousa[index]);
     pixel.style.width = objectConfig.edge + "px";
     pixel.style.height = objectConfig.edge + "px";
     pixel.className = "pixel";
