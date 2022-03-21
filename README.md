@@ -1,5 +1,5 @@
 # Como ele está se comportando atualmente
-<img src='https://user-images.githubusercontent.com/79944385/159147936-cf6efa08-0547-44d3-a9a1-d44b38514f7d.gif' />
+<img src='https://user-images.githubusercontent.com/79944385/159207683-06d33bbb-7778-42ff-8358-03e42de08b3b.gif' />
 
 # Trybic PixelArt
 
