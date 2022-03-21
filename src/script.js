@@ -17,20 +17,23 @@ const HEIGHT_MIN = 100;
 const HEIGHT_MAX = 700;
 
 /* Configuração inicial da lousa que poderá ser alterada pelo usuário */
-let width = 600;
-let height = 500;
-let pixelEdges = tamanhosDePixelsPossivel(width, height);
-let edge = pixelEdges[0];
-inputWidth.value = width;
-inputHeight.value = height;
-inputPixelEdge.max = pixelEdges.length - 2;
-inputPixelEdge.min = 0;
-inputPixelEdge.value = 0;
-
+const objectConfig = {
+  width: 600,
+  height: 500,
+  pixelEdges: 0,
+  edge: 0,
+}
+objectConfig.pixelEdges = tamanhosDePixelsPossivel(objectConfig.width, objectConfig.height);
+objectConfig.edge = objectConfig.pixelEdges[0];
 
 /* adicionando as configurações iniciais da página */
 function getPropertiesOfUser() {
   getLastSave();
+  inputWidth.value = objectConfig.width;
+  inputHeight.value = objectConfig.height;
+  inputPixelEdge.max = objectConfig.pixelEdges.length - 2;
+  inputPixelEdge.min = 0;
+  inputPixelEdge.value = objectConfig.pixelEdges.indexOf(objectConfig.edge);
   renderizationOfLousa();
   inicializaPalette();
   userProperties();
@@ -86,29 +89,30 @@ function borderOnOrOff(event) {
 /* Função para alterar o tamando da largura conforme o novo input do usuário */
 function modifyWidthOfLousa(event) {
   deleteDrawing();
-  width = event.target.value;
-  pixelEdges = tamanhosDePixelsPossivel(width, height);
-  edge = pixelEdges[0];
+  objectConfig.width = event.target.value;
+  objectConfig.pixelEdges = tamanhosDePixelsPossivel(objectConfig.width, objectConfig.height);
+  objectConfig.edge = objectConfig.pixelEdges[0];
   inputPixelEdge.value = 0;
-  inputPixelEdge.max = pixelEdges.length - 2;
+  inputPixelEdge.max = objectConfig.pixelEdges.length - 2;
   renderizationOfLousa();
 }
 
 /* Função para alterar o tamando da altura conforme o novo input do usuário */
 function modifyHeightOfLousa(event) {
   deleteDrawing();
-  height = event.target.value;
-  pixelEdges = tamanhosDePixelsPossivel(width, height);
-  edge = pixelEdges[0];
+  objectConfig.height = event.target.value;
+  objectConfig.pixelEdges = tamanhosDePixelsPossivel(objectConfig.width, objectConfig.height);
+  objectConfig.edge = objectConfig.pixelEdges[0];
   inputPixelEdge.value = 0;
-  inputPixelEdge.max = pixelEdges.length - 2;
+  inputPixelEdge.max = objectConfig.pixelEdges.length - 2;
   renderizationOfLousa();
 }
 
 /* Função para modificar a quantidade de pixel na tele de pintura */
 function modifyQuantityOfPixel(event) {
+  deleteDrawing();
   let index = event.target.value;
-  edge = pixelEdges[index];
+  objectConfig.edge = objectConfig.pixelEdges[index];
   renderizationOfLousa();
 }
 
@@ -121,10 +125,10 @@ function saveChanges(){
     pixelEdges: 0,
     edge: 0,
   };
-  objChangesUser.width = width;
-  objChangesUser.height = height;
-  objChangesUser.pixelEdges = pixelEdges;
-  objChangesUser.edge = edge;
+  objChangesUser.width = objectConfig.width;
+  objChangesUser.height = objectConfig.height;
+  objChangesUser.pixelEdges = objectConfig.pixelEdges;
+  objChangesUser.edge = objectConfig.edge;
   for (let pixel of lousaContainer.children){
     objChangesUser.lousa.push(pixel.style.backgroundColor);
   }
@@ -149,13 +153,13 @@ function getLastSave(){
   let hasLastSave = false;
   if (storage !== null) {
     hasLastSave = true;
-    width = storage.width;
-    height = storage.height;
-    pixelEdges = storage.pixelEdges;
-    edge = storage.edge;
+    objectConfig.width = storage.width;
+    objectConfig.height = storage.height;
+    objectConfig.pixelEdges = storage.pixelEdges;
+    objectConfig.edge = storage.edge;
     inputWidth.value = storage.width;
     inputHeight.value = storage.height;
-    inputPixelEdge.value = storage.pixelEdges.indexOf(edge);
+    inputPixelEdge.value = storage.pixelEdges.indexOf(objectConfig.edge);
     renderizationOfLousa();
     setTickmarks();
   }
@@ -192,27 +196,28 @@ function setTickmarks() {
 /* Função para adicionar a renderização, inicial e/ou alterada pelo usuário, do qudro na pagina */
 function renderizationOfLousa() {
   const storage = JSON.parse(localStorage.getItem('lousaModify'));
-  lousaContainer.style.width = width + "px";
-  lousaContainer.style.height = height + "px";
+  lousaContainer.style.width = objectConfig.width + "px";
+  lousaContainer.style.height = objectConfig.height + "px";
 
-  const quantityOfPixels = (width * height) / edge ** 2;
+  const quantityOfPixels = (objectConfig.width * objectConfig.height) / objectConfig.edge ** 2;
 
   if (lousaContainer.children.length !== 0) {
     lousaContainer.innerHTML = null;
   }
+
   for (let index = 0; index < quantityOfPixels; index += 1) {
     const pixel = document.createElement("div");
     if (borderOnOff[0].checked) {
       pixel.style.borderBottom = "0.1px solid #000000";
       pixel.style.borderRight = "0.1px solid #000000";
     }
-    storage === null ? (
+    (storage === null) ? (
       pixel.style.backgroundColor = '#FFFFFF'
     ):(
       pixel.style.backgroundColor = storage.lousa[index]
     )
-    pixel.style.width = edge + "px";
-    pixel.style.height = edge + "px";
+    pixel.style.width = objectConfig.edge + "px";
+    pixel.style.height = objectConfig.edge + "px";
     pixel.className = "pixel";
     lousaContainer.appendChild(pixel);
   }
