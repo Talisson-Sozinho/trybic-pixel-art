@@ -9,10 +9,10 @@
 </head>
 <body>
   <div id="configure-container">
-    <label>width:</label>
+    <label>Width:</label>
     <input id="input-width" list="tickmarks-width"type="range" max="900" min="100" step="50">
     <datalist id="tickmarks-width"></datalist>
-    <label>height:</label>
+    <label>Height:</label>
     <input id="input-height" list='tickmarks-height' type="range" max="700" min="100" step="50">
     <datalist id="tickmarks-height"></datalist>
     <label>Pixel quantity:</label>
@@ -20,7 +20,7 @@
     <datalist id="tickmarks-pixel-edge">
     </datalist>
     <div id="border-on-off">
-      <p>Borda:</p>
+      <p>Border:</p>
       <label>on</label>
       <input class="border-option" type='radio' name='boderChoice' value='on' checked/>
       <input class="border-option" type='radio' name='boderChoice' value='off' />
@@ -28,9 +28,12 @@
     </div>
   </div>
   <div class="buttons">
-    <button id="save-changes-button" type="button">Save Changes</button>
+    <button class="btn-storage" id="save-changes-button" type="button">Save Changes</button>
+    <button class="btn-storage" id='delete-button' type="button">Clear frame</button>
+    <button class="btn-storage" id='delete-last-save-button' type="button">Delete last save</button>
+    <button class="btn-storage" id='get-last-save-button' type="button">Get last save</button>
   </div>
-  <h1>Minha pixel art</h1>
+  <h1>My Pixel Art</h1>
   <div id="lousa-container">
   </div>
   <div id="color-palette">
