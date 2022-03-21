@@ -15,7 +15,7 @@ h1 {
 #configure-container {
   position: fixed;
   left: 15px;
-  top: 20vh;
+  top: 15vh;
   background-color: #FFD9F5;
   border-radius: 10px;
   height: 50vh;
@@ -39,6 +39,25 @@ h1 {
 }
 #configure-container #border-on-off label {
   display: inline;
+}
+
+.buttons{
+  display: inline-block;
+  background-color: #FFD9F5;
+  position: fixed;
+  height: 10vh;
+  width: 13vw;
+  border-radius: 10px;
+  left: 15px;
+  bottom: 20vh;
+  padding-left: 21px;
+  padding-top: 17px;
+}
+
+#save-changes-button {
+  display: inline-block;
+  height: 5vh;
+  width: 10vw;
 }
 
 #lousa-container{
@@ -72,7 +91,22 @@ h1 {
   height: 40px;
   width: 40px;
   border-radius: 10px;
-  border: 1px solid #252525;
+  transition: height 200ms;
+  transition: width 200ms;
+}
+
+.color:hover {
+  border: 3px solid #000;
+}
+
+#color-palette #colorRGB{
+  background-color: #FFD9F5;
+  border-radius: 5px;
+  border: 0;
+}
+
+#color-palette #colorRGB:hover{
+  border: 1px solid #000;
 }
 
 #colorRGB{

@@ -4,7 +4,8 @@ const colorPalette = document.getElementById("color-palette");
 const inputWidth = document.getElementById("input-width");
 const inputHeight = document.getElementById("input-height");
 const inputPixelEdge = document.getElementById("input-pixel-edge");
-const borderOnOff = document.getElementsByClassName("border-option");
+const borderOnOff = document.getElementsByClassName("border-option")
+const saveChangesButton = document.getElementById("save-changes-button");
 
 /* Constantes de largura e altura maximaria */
 const WIDTH_MIN = 100;
@@ -21,8 +22,19 @@ inputPixelEdge.max = pixelEdges.length - 2;
 inputPixelEdge.min = 0;
 inputPixelEdge.value = 0;
 
+const storage = JSON.parse(localStorage.getItem('lousaModify'));
+
 /* adicionando as configurações iniciais da página */
 function getPropertiesOfUser() {
+  if (storage !== null) {
+    width = storage.width;
+    height = storage.height;
+    pixelEdges = storage.pixelEdges;
+    edge = storage.edge;
+    inputWidth.value = storage.width;
+    inputHeight.value = storage.height;
+    inputPixelEdge.value = storage.pixelEdges.indexOf(edge);
+  }
   renderizationOfLousa();
   inicializaPalette();
   userProperties();
@@ -43,6 +55,7 @@ function userProperties() {
   inputWidth.addEventListener("input", modifyWidthOfLousa);
   inputHeight.addEventListener("input", modifyHeightOfLousa);
   inputPixelEdge.addEventListener("change", modifyQuantityOfPixel);
+  saveChangesButton.addEventListener("click",saveChanges);
   borderOnOff[0].addEventListener("input", borderOnOrOff);
   borderOnOff[1].addEventListener("input", borderOnOrOff);
 }
@@ -94,6 +107,26 @@ function modifyQuantityOfPixel(event) {
   renderizationOfLousa();
 }
 
+/* Função para salvar a pixel art no localStorage */
+function saveChanges(){
+  const objChangesUser = {
+    lousa: [],
+    width: 0,
+    height: 0,
+    pixelEdges: 0,
+    edge: 0,
+  };
+  objChangesUser.width = width;
+  objChangesUser.height = height;
+  objChangesUser.pixelEdges = pixelEdges;
+  objChangesUser.edge = edge;
+  for (let pixel of lousaContainer.children){
+    objChangesUser.lousa.push(pixel.style.backgroundColor);
+  }
+  localStorage.setItem('lousaModify', JSON.stringify(objChangesUser));
+  alert('Salvo');
+}
+
 /* Função para alterar a marcação da quantidade de pixel */
 function modifyTickmarksPixel() {
   const tickmarks = document.getElementById("tickmarks-pixel-edge");
@@ -137,6 +170,11 @@ function renderizationOfLousa() {
       pixel.style.borderBottom = "0.1px solid #000000";
       pixel.style.borderRight = "0.1px solid #000000";
     }
+    storage === null ? (
+      pixel.style.backgroundColor = '#FFFFFF'
+    ):(
+      pixel.style.backgroundColor = storage.lousa[index]
+    )
     pixel.style.width = edge + "px";
     pixel.style.height = edge + "px";
     pixel.className = "pixel";
